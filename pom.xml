@@ -1110,9 +1110,10 @@
 									<pluginExecutionFilter>
 										<groupId>org.apache.felix</groupId>
 										<artifactId>maven-bundle-plugin</artifactId>
-										<versionRange>[1.0-alpha-,)</versionRange>
+										<versionRange>[1.0,)</versionRange>
 										<goals>
-											<goal>default</goal>
+											<goal>manifest</goal>
+											<goal>bundle</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
@@ -1152,6 +1153,19 @@
 										<versionRange>[1.0-alpha-,)</versionRange>
 										<goals>
 											<goal>copy</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>xml-maven-plugin</artifactId>
+										<versionRange>[1.0-alpha-,)</versionRange>
+										<goals>
+											<goal>transform</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
