@@ -140,6 +140,11 @@ under the License.
     <level value="INFO"/>
     <appender-ref ref="rest"/>
   </logger>
+  
+  <logger name="org.apache.cxf" additivity="false">
+    <level value="INFO"/>
+    <appender-ref ref="rest"/>
+  </logger>
     
   <root>
     <level value="INFO"/>
