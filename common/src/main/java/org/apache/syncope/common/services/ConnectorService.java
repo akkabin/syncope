@@ -22,7 +22,6 @@ import java.util.List;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.MatrixParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -32,6 +31,7 @@ import javax.ws.rs.core.Response;
 import org.apache.syncope.common.to.BulkAction;
 import org.apache.syncope.common.to.BulkActionRes;
 import org.apache.syncope.common.to.ConnBundleTO;
+import org.apache.syncope.common.to.ConnIdObjectClassTO;
 import org.apache.syncope.common.to.ConnInstanceTO;
 import org.apache.syncope.common.to.SchemaTO;
 import org.apache.syncope.common.types.ConnConfProperty;
@@ -74,17 +74,31 @@ public interface ConnectorService {
     /**
      * @param connInstanceId connector instance id to be used for schema lookup
      * @param connInstanceTO connector instance object to provide special configuration properties
-     * @param showAll if set to true, special schema names (like '__PASSWORD__') will be included; default is false
+     * @param includeSpecial if set to true, special schema names (like '__PASSWORD__') will be included;
+     * default is false
      * @return schema names for connector bundle matching the given connector instance id
      */
     @POST
-    @Path("{connInstanceId}/schemas")
+    @Path("{connInstanceId}/schemaNames")
     List<SchemaTO> getSchemaNames(@PathParam("connInstanceId") Long connInstanceId, ConnInstanceTO connInstanceTO,
-            @QueryParam("showAll") @DefaultValue("false") boolean showAll);
+            @QueryParam("includeSpecial") @DefaultValue("false") boolean includeSpecial);
 
     /**
-     * @param lang language to select property keys; default language is English
+     * @param connInstanceId connector instance id to be used for schema lookup
+     * @param connInstanceTO connector instance object to provide special configuration properties
+     * @return supported object classes for connector bundle matching the given connector instance id
+     */
+    @POST
+    @Path("{connInstanceId}/supportedObjectClasses")
+    List<ConnIdObjectClassTO> getSupportedObjectClasses(@PathParam("connInstanceId") Long connInstanceId,
+            ConnInstanceTO connInstanceTO);
+
+    /**
+     * @param lang language to select property keys, null for default (English).
+     * An ISO 639 alpha-2 or alpha-3 language code, or a language subtag up to 8 characters in length. See the
+     * java.util.Locale class description about valid language values.
      * @return list of all connector instances with property keys in the matching language
+     * @see java.util.Locale
      */
     @GET
     List<ConnInstanceTO> list(@QueryParam("lang") String lang);
@@ -102,7 +116,8 @@ public interface ConnectorService {
      * @return connector instance for matching resource
      */
     @GET
-    ConnInstanceTO readByResource(@MatrixParam("resourceName") String resourceName);
+    @Path("byResource/{resourceName}")
+    ConnInstanceTO readByResource(@PathParam("resourceName") String resourceName);
 
     /**
      * @param connInstanceId connector instance id to be updated
