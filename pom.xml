@@ -294,7 +294,7 @@ under the License.
     <commons-jexl.version>2.1.1</commons-jexl.version>
     <commons-lang.version>2.6</commons-lang.version>
         
-    <httpcomponents.version>4.2.4</httpcomponents.version>
+    <hc.client.version>4.2.5</hc.client.version>
 
     <activiti.version>5.12</activiti.version>
 
@@ -307,7 +307,7 @@ under the License.
     <velocity.version>1.7</velocity.version>
     <quartz.version>2.1.7</quartz.version>
 
-    <openjpa.version>2.2.1</openjpa.version>
+    <openjpa.version>2.2.2</openjpa.version>
     <bval.version>0.5</bval.version>
         
     <cocoon.version>3.0.0-alpha-3</cocoon.version>
@@ -407,13 +407,8 @@ under the License.
 
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
-        <artifactId>httpcore</artifactId>
-        <version>${httpcomponents.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>${httpcomponents.version}</version>
+        <version>${hc.client.version}</version>
       </dependency>
 
       <dependency>
